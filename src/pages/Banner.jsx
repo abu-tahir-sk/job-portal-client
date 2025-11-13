@@ -1,13 +1,23 @@
-
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+import team1 from "../assets/image/team1.jpg";
 
 const Banner = () => {
   return (
     <div className="hero bg-base-200 min-h-[60vh] ">
       <div className="hero-content flex-col lg:flex-row-reverse justify-center items-center">
         <div className="flex-1">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-            className="max-w-sm rounded-lg shadow-2xl"
+          <motion.img
+            src={team1}
+            animate={{ y: [100, 75, 0] }}
+            transition={{ duration: 10, repeat: Infinity }}
+            className="max-w-sm w-72 rounded-t-[45px] border-b-4 border-l-4 border-blue-500 rounded-br-[45px] shadow-2xl"
+          />
+          <motion.img
+            src={team1}
+            animate={{ x: [100, 150, 100] }}
+            transition={{ duration: 10, repeat: Infinity }}
+            className="max-w-sm w-72 rounded-t-[45px] border-b-4 border-l-4 border-blue-500 rounded-br-[45px] shadow-2xl"
           />
         </div>
         <div className="flex-1">

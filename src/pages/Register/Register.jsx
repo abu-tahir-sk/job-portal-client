@@ -2,10 +2,13 @@ import Lottie from "lottie-react";
 import registerLottie from "../../assets/lottie/register.json";
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { createUser } = useContext(AuthContext);
+  const [open, setOpen] = useState(true);
+  const navigate = useNavigate()
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -15,13 +18,11 @@ const Register = () => {
     console.log(email, password);
 
     setErrorMessage("");
-   
 
     if (password.length < 6) {
       setErrorMessage("password should be 6 characters");
       return;
     }
-     
 
     const passwordReg = /([A-Z])([a-z])/;
     if (!passwordReg.test(password)) {
@@ -32,6 +33,8 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         console.log(result);
+        navigate('/')
+
       })
       .catch((error) => {
         console.log(error);
@@ -56,7 +59,6 @@ const Register = () => {
                 placeholder="email"
                 name="email"
                 className="input input-bordered"
-               
               />
             </div>
             <div className="form-control">
@@ -64,12 +66,12 @@ const Register = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={open ? "text": "password"}
                 placeholder="password"
                 name="password"
                 className="input input-bordered"
-                
               />
+              <button onClick={()=>setOpen(!open)}>show password</button>
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
                   Forgot password?

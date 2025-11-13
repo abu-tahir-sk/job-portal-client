@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
     signOutUser
   };
   return (
-    <AuthContext.Provider value={infoData}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={infoData}>{!loading && children}</AuthContext.Provider>
   );
 };
 

@@ -1,33 +1,37 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
-import signInLottie from "../../assets/lottie/signin.json"
+import signInLottie from "../../assets/lottie/signin.json";
 import Lottie from "lottie-react";
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-      const [errorMessage, setErrorMessage] = useState("");
-        const { signInUser } = useContext(AuthContext);
-      
-        const handleRegister = (e) => {
-          e.preventDefault();
-          const form = e.target;
-          const email = form.email.value;
-          const password = form.password.value;
-          console.log(email, password);
-      
-          setErrorMessage("");
-         
-      
-          signInUser(email, password)
-            .then((result) => {
-              console.log(result);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        };
-      return (
-            <div className="hero min-h-screen bg-base-200">
+  const [errorMessage, setErrorMessage] = useState("");
+  const { signInUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log("in signIn ", location);
+  const from = location.state || "/";
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    setErrorMessage("");
+
+    signInUser(email, password)
+      .then((result) => {
+        console.log(result);
+        navigate(from)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  return (
+    <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left w-96">
           <Lottie animationData={signInLottie}></Lottie>
@@ -44,7 +48,6 @@ const SignIn = () => {
                 placeholder="email"
                 name="email"
                 className="input input-bordered"
-               
               />
             </div>
             <div className="form-control">
@@ -56,7 +59,6 @@ const SignIn = () => {
                 placeholder="password"
                 name="password"
                 className="input input-bordered"
-                
               />
               <label className="label">
                 <a href="#" className="label-text-alt link link-hover">
@@ -74,7 +76,7 @@ const SignIn = () => {
         </div>
       </div>
     </div>
-      );
+  );
 };
 
 export default SignIn;
