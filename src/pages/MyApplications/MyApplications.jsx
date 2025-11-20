@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../../hooks/UseAuth";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
   const { user } = UseAuth();
+  const axiosSecure = useAxiosSecure();
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
@@ -11,11 +13,18 @@ const MyApplications = () => {
     //   .then((res) => res.json())
     //   .then((data) => setJobs(data));
 
-    axios
-      .get(`http://localhost:5000/job-application?email=${user.email}`, {
-        withCredentials: true,
-      })
-      .then((res) => setJobs(res.data));
+    // axios
+    //   .get(`http://localhost:5000/job-application?email=${user.email}`, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => {
+    //     setJobs(res.data);
+    //     console.log(res.data);
+    //   });
+
+    axiosSecure.get(`/job-application?email=${user.email}`)
+    .then(res=>setJobs(res.data))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.email]);
   return (
     <div>
