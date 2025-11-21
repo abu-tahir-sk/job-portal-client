@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import UseAuth from "../../hooks/UseAuth";
-import axios from "axios";
+// import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
@@ -22,9 +22,10 @@ const MyApplications = () => {
     //     console.log(res.data);
     //   });
 
-    axiosSecure.get(`/job-application?email=${user.email}`)
-    .then(res=>setJobs(res.data))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    axiosSecure
+      .get(`/job-application?email=${user.email}`)
+      .then((res) => setJobs(res.data));
+
   }, [user.email]);
   return (
     <div>
