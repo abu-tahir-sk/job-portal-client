@@ -31,15 +31,15 @@ const AuthProvider = ({ children }) => {
         const user = { email: currentUser.email };
 
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://job-prtal-server.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => console.log("logIn token", res.data));
-           setLoading(false);
+        setLoading(false);
       } else {
         axios
           .post(
-            "http://localhost:5000/logout",
+            "https://job-prtal-server.vercel.app/logout",
             {},
             {
               withCredentials: true,
@@ -47,11 +47,9 @@ const AuthProvider = ({ children }) => {
           )
           .then((res) => {
             console.log("logout", res.data);
-             setLoading(false);
+            setLoading(false);
           });
       }
-
-     
     });
     return () => {
       unsubscribe();

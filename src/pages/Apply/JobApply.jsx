@@ -4,7 +4,7 @@ import UseAuth from "../../hooks/UseAuth";
 const JobApply = () => {
   const { id } = useParams();
   const { user } = UseAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //   console.log(id);
   const submitApplication = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const JobApply = () => {
       github,
       resume,
     };
-    fetch("http://localhost:5000/job-applications", {
+    fetch("https://job-prtal-server.vercel.app/job-applications", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -32,7 +32,7 @@ const JobApply = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        navigate('/myApplications')
+        navigate("/myApplications");
       });
   };
   return (

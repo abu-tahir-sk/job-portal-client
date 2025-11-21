@@ -7,7 +7,7 @@ const MyPostedJobs = () => {
   const { user } = UseAuth([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/jobs?email=${user.email}`)
+    fetch(`https://job-prtal-server.vercel.app/jobs?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, [user.email]);
@@ -34,9 +34,9 @@ const MyPostedJobs = () => {
                 <td>{job.applicationDeadline}</td>
                 <td>{job.applicationCount}</td>
                 <td>
-                 <Link to={`/viewApplications/${job._id}`}>
-                  <button className="btn btn-link"> View Applications</button>
-                 </Link>
+                  <Link to={`/viewApplications/${job._id}`}>
+                    <button className="btn btn-link"> View Applications</button>
+                  </Link>
                 </td>
               </tr>
             ))}
